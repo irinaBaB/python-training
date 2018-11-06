@@ -10,6 +10,9 @@
   <component name="PackageRequirementsSettings">
     <option name="requirementsPath" value="C:\Python36" />
   </component>
+  <component name="PyDocumentationSettings">
+    <option name="analyzeDoctest" value="false" />
+  </component>
   <component name="TestRunnerService">
     <option name="projectConfiguration" value="pytest" />
     <option name="PROJECT_TEST_RUNNER" value="pytest" />
