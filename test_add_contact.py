@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-from selenium import webdriver
+from selenium.webdriver.firefox.webdriver import WebDriver
 import unittest
 from contact import Contact
 
 class CreateContact(unittest.TestCase):
     def setUp(self):
-        self.wd = webdriver.Firefox()
+        self.wd = WebDriver()
         self.wd.implicitly_wait(30)
 
     def test_create_contact(self):
