@@ -51,7 +51,7 @@ class Application:
 
     def open_home_page(self):
         wd = self.wd
-        wd.get("http://localhost/addressbook/group.php")
+        wd.get("http://localhost/addressbook/")
 
     def destroy(self):
         self.wd.quit()
@@ -104,17 +104,3 @@ class Application:
     def open_create_contact_page(self):
         wd = self.wd
         wd.find_element_by_link_text("add new").click()
-
-    def login(self, username, password):
-        wd = self.wd
-        wd.find_element_by_name("user").click()
-        wd.find_element_by_name("user").clear()
-        wd.find_element_by_name("user").send_keys(username)
-        wd.find_element_by_name("pass").clear()
-        wd.find_element_by_name("pass").send_keys(password)
-        wd.find_element_by_xpath("//form[@id='LoginForm']/input[3]").click()
-
-    def open_home_page(self):
-        wd = self.wd
-        wd.get("http://localhost/addressbook/")
-
