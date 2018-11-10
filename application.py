@@ -105,7 +105,7 @@ class Application:
         wd = self.wd
         wd.find_element_by_link_text("add new").click()
 
-    def login(self,username, password):
+    def login(self, username, password):
         wd = self.wd
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
