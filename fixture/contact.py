@@ -13,35 +13,30 @@ class ContactHelper:
         wd = self.app.wd
         # open contact page
         self.open_create_contact_page()
-        wd.find_element_by_name("firstname").click()
-        wd.find_element_by_name("firstname").clear()
-        wd.find_element_by_name("firstname").send_keys(contact.firstname)
-        wd.find_element_by_name("middlename").click()
-        wd.find_element_by_name("middlename").clear()
-        wd.find_element_by_name("middlename").send_keys(contact.middlename)
-        wd.find_element_by_name("lastname").click()
-        wd.find_element_by_name("lastname").clear()
-        wd.find_element_by_name("lastname").send_keys(contact.lastname)
-        wd.find_element_by_name("nickname").click()
-        wd.find_element_by_name("nickname").clear()
-        wd.find_element_by_name("nickname").send_keys(contact.nickname)
-        wd.find_element_by_name("company").click()
-        wd.find_element_by_name("company").clear()
-        wd.find_element_by_name("company").send_keys(contact.companyname)
-        wd.find_element_by_name("address").click()
-        wd.find_element_by_name("address").clear()
-        wd.find_element_by_name("address").send_keys(contact.address)
-        wd.find_element_by_name("theform").click()
-        wd.find_element_by_name("email").click()
-        wd.find_element_by_name("email").clear()
-        wd.find_element_by_name("email").send_keys(contact.email)
-        wd.find_element_by_name("phone2").click()
-        wd.find_element_by_name("phone2").clear()
-        wd.find_element_by_name("phone2").send_keys(contact.phone2)
+        self.fill_out_createcontact_form(contact)
         # submit contact creation
         wd.find_element_by_xpath("(//*[@id='content']/form/input[21])").click()
         # go to home page
         self.return_to_homepage()
+
+    def fill_out_createcontact_form(self, contact):
+        wd = self.app.wd
+        self.change_field_contact_value("firstname", contact.firstname)
+        self.change_field_contact_value("middlename", contact.middlename)
+        self.change_field_contact_value("lastname", contact.lastname)
+        self.change_field_contact_value("nickname", contact.nickname)
+        self.change_field_contact_value("company", contact.companyname)
+        self.change_field_contact_value("address", contact.address)
+        self.change_field_contact_value("email", contact.email)
+        self.change_field_contact_value("phone2", contact.phone2)
+    #ind_element_by_name("theform").click()
+
+    def change_field_contact_value(self,field_name, text):
+        wd = self.app.wd
+        if text is not None:
+            wd.find_element_by_name(field_name).click()
+            wd.find_element_by_name(field_name).clear()
+            wd.find_element_by_name(field_name).send_keys(text)
 
     def delete_contact(self):
         wd = self.app.wd
@@ -57,3 +52,8 @@ class ContactHelper:
     def open_create_contact_page(self):
         wd = self.app.wd
         wd.find_element_by_link_text("add new").click()
+
+    def count(self):
+        wd = self.app.wd
+        self.return_to_homepage()
+        return len(wd.find_elements_by_name("selected[]"))
