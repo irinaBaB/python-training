@@ -51,7 +51,8 @@ class ContactHelper:
         wd.implicitly_wait(60)
         alert = wd.switch_to.alert
         alert.accept()
-        #self.return_to_homepage()
+        self.return_to_homepage()
+        wd.implicitly_wait(180)
 
     def open_create_contact_page(self):
         wd = self.app.wd
