@@ -6,7 +6,9 @@ class ContactHelper:
 
     def return_to_homepage(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("home").click()
+        if not (wd.current_url.endswith("/addressbook/")and
+                len(wd.find_elements_by_xpath("//*[@id='content']/form[2]/div[1]/input"))>0):
+            wd.find_element_by_link_text("home").click()
 
     def create(self, contact):
         # create contact
@@ -29,6 +31,7 @@ class ContactHelper:
         self.change_field_contact_value("address", contact.address)
         self.change_field_contact_value("email", contact.email)
         self.change_field_contact_value("phone2", contact.phone2)
+        self.change_field_contact_value("mobile",contact.mobile)
     #ind_element_by_name("theform").click()
 
     def change_field_contact_value(self,field_name, text):
@@ -37,6 +40,22 @@ class ContactHelper:
             wd.find_element_by_name(field_name).click()
             wd.find_element_by_name(field_name).clear()
             wd.find_element_by_name(field_name).send_keys(text)
+
+    def modify_first_contact(self, new_contact_data):
+        wd = self.app.wd
+        self.return_to_homepage()
+        self.select_first_contact()
+        # click to edit link
+        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        # update required fields
+        self.fill_out_createcontact_form(new_contact_data)
+        # click to update contact form
+        wd.find_element_by_xpath("(//input[@name='update'])[2]").click()
+        self.return_to_homepage()
+
+    def select_first_contact(self):
+        wd = self.app.wd
+        wd.find_element_by_name("selected[]").click()
 
     def delete_contact(self):
         wd = self.app.wd
