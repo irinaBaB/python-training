@@ -1,3 +1,4 @@
+from model.contact import Contact
 
 
 class ContactHelper:
@@ -62,11 +63,11 @@ class ContactHelper:
         self.return_to_homepage()
         wd.find_element_by_name("selected[]").click()
         wd.find_element_by_xpath("//input[@value='Delete']").click()
-        wd.implicitly_wait(60)
+        #wd.implicitly_wait(50)
         alert = wd.switch_to.alert
         alert.accept()
         self.return_to_homepage()
-        wd.implicitly_wait(180)
+        #wd.implicitly_wait(180)
 
     def open_create_contact_page(self):
         wd = self.app.wd
@@ -76,3 +77,15 @@ class ContactHelper:
         wd = self.app.wd
         self.return_to_homepage()
         return len(wd.find_elements_by_name("selected[]"))
+
+    def get_contacts_list(self):
+        wd = self.app.wd
+        self.return_to_homepage()
+        contacts=[]
+        for element in wd.find_elements_by_css_selector("td:nth-child(1)"):
+            text = element.text
+            id = element.find_element_by_name("selected[]").get_attribute("value")
+            contacts.append(Contact(lastname=text, id=id))
+        return contacts
+
+
