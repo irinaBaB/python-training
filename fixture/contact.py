@@ -82,10 +82,67 @@ class ContactHelper:
         wd = self.app.wd
         self.return_to_homepage()
         contacts=[]
-        for element in wd.find_elements_by_css_selector("td:nth-child(1)"):
+        for element in wd.find_elements_by_css_selector("td:nth-child(2)"):
+            # wd.implicitly_wait(50)
             text = element.text
+        for element in wd.find_elements_by_css_selector("td:nth-child(3)"):
+            text2 = element.text
+        for element in wd.find_elements_by_css_selector("td:nth-child(1)"):
+            # wd.implicitly_wait(50)
             id = element.find_element_by_name("selected[]").get_attribute("value")
-            contacts.append(Contact(lastname=text, id=id))
+            contacts.append(Contact(lastname=text,firstname=text2,id=id))
         return contacts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
