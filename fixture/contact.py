@@ -42,10 +42,14 @@ class ContactHelper:
             wd.find_element_by_name(field_name).clear()
             wd.find_element_by_name(field_name).send_keys(text)
 
-    def modify_first_contact(self, new_contact_data):
+    def modify_first_contact(self):
+        wd = self.app.wd
+        self.modify_group_by_index(0)
+
+    def modify_group_by_index(self,index, new_contact_data):
         wd = self.app.wd
         self.return_to_homepage()
-        self.select_first_contact()
+        self.select_contact_by_index(index)
         # click to edit link
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
         # update required fields
@@ -59,16 +63,24 @@ class ContactHelper:
         wd = self.app.wd
         wd.find_element_by_name("selected[]").click()
 
+    def select_contact_by_index(self,index):
+        wd = self.app.wd
+        wd.find_elements_by_name("selected[]")[index].click()
+
     def delete_contact(self):
         wd = self.app.wd
+        self.delete_contact_by_index(0)
+
+    def delete_contact_by_index(self,index):
+        wd = self.app.wd
         self.return_to_homepage()
-        wd.find_element_by_name("selected[]").click()
+        self.select_contact_by_index(index)
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         #wd.implicitly_wait(50)
         alert = wd.switch_to.alert
         alert.accept()
         self.return_to_homepage()
-        self.contact_cache=None
+        self.contact_cache = None
 
     def open_create_contact_page(self):
         wd = self.app.wd
