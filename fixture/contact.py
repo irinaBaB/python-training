@@ -34,7 +34,6 @@ class ContactHelper:
         self.change_field_contact_value("email", contact.email)
         self.change_field_contact_value("phone2", contact.phone2)
         self.change_field_contact_value("mobile",contact.mobile)
-    #ind_element_by_name("theform").click()
 
     def change_field_contact_value(self,field_name, text):
         wd = self.app.wd
