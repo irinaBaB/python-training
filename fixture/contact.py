@@ -21,6 +21,7 @@ class ContactHelper:
         wd.find_element_by_xpath("(//*[@id='content']/form/input[21])").click()
         # go to home page
         self.return_to_homepage()
+        self.contact_cache = None
 
     def fill_out_createcontact_form(self, contact):
         wd = self.app.wd
@@ -53,6 +54,7 @@ class ContactHelper:
         # click to update contact form
         wd.find_element_by_xpath("(//input[@name='update'])[2]").click()
         self.return_to_homepage()
+        self.contact_cache = None
 
     def select_first_contact(self):
         wd = self.app.wd
@@ -67,7 +69,7 @@ class ContactHelper:
         alert = wd.switch_to.alert
         alert.accept()
         self.return_to_homepage()
-        #wd.implicitly_wait(180)
+        self.contact_cache=None
 
     def open_create_contact_page(self):
         wd = self.app.wd
@@ -78,20 +80,23 @@ class ContactHelper:
         self.return_to_homepage()
         return len(wd.find_elements_by_name("selected[]"))
 
+    contact_cache= None
+
     def get_contacts_list(self):
-        wd = self.app.wd
-        self.return_to_homepage()
-        contacts=[]
-        for element in wd.find_elements_by_css_selector("td:nth-child(2)"):
-            # wd.implicitly_wait(50)
-            text = element.text
-        for element in wd.find_elements_by_css_selector("td:nth-child(3)"):
-            text2 = element.text
-        for element in wd.find_elements_by_css_selector("td:nth-child(1)"):
-            # wd.implicitly_wait(50)
-            id = element.find_element_by_name("selected[]").get_attribute("value")
-            contacts.append(Contact(lastname=text,firstname=text2,id=id))
-        return contacts
+        if self.contact_cache is None:
+            wd = self.app.wd
+            self.return_to_homepage()
+            self.contact_cache=[]
+            for element in wd.find_elements_by_css_selector("td:nth-child(2)"):
+                # wd.implicitly_wait(50)
+                text = element.text
+            for element in wd.find_elements_by_css_selector("td:nth-child(3)"):
+                text2 = element.text
+            for element in wd.find_elements_by_css_selector("td:nth-child(1)"):
+                # wd.implicitly_wait(50)
+                id = element.find_element_by_name("selected[]").get_attribute("value")
+                self.contact_cache.append(Contact(lastname=text,firstname=text2,id=id))
+        return list (self.contact_cache)
 
 
 
