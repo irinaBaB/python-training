@@ -9,7 +9,7 @@ def test_modify_contact_firstname(app):
     index = randrange(len(old_contacts))
     field_change = Contact(firstname="babushka")
     field_change.id = old_contacts[index].id
-    app.contact.modify_group_by_index(index,field_change)
+    app.contact.modify_contact_by_index(index,field_change)
     new_contact = app.contact.get_contacts_list()
     assert len(old_contacts) == len(new_contact)
     old_contacts[index]= field_change
@@ -21,7 +21,7 @@ def test_modify_contact_lastname(app):
     index = randrange(len(old_contacts))
     field_change = Contact(lastname="torpeda")
     field_change.id = old_contacts[index].id
-    app.contact.modify_group_by_index(index,field_change)
+    app.contact.modify_contact_by_index(index,field_change)
     new_contact = app.contact.get_contacts_list()
     assert len(old_contacts) == len(new_contact)
     old_contacts[index] = field_change
