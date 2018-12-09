@@ -9,8 +9,11 @@ class Contact:
                   companyname=None,
                   address=None,
                   email=None,
-                  phone2=None,
+                  home=None,
+                  work=None,
                   mobile=None,
+                  phone2=None,
+                  fax=None,
                   id= None):
             self.firstname = firstname
             self.middlename = middlename
@@ -19,8 +22,11 @@ class Contact:
             self.companyname = companyname
             self.address = address
             self.email = email
-            self.phone2 = phone2
+            self.home = home
+            self.fax = fax
+            self.work = work
             self.mobile = mobile
+            self.phone2= phone2
             self.id = id
 
 
