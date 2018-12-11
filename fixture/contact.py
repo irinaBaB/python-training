@@ -50,7 +50,7 @@ class ContactHelper:
     def modify_contact_by_index(self,index, new_contact_data):
         wd = self.app.wd
         self.return_to_homepage()
-        wd.find_element_by_name("selected[]").click()[index]
+        wd.find_elements_by_name("selected[]").click()[index]
         # click to edit link
         self.select_contact_by_index(index)
         # update required fields
