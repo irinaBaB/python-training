@@ -11,7 +11,10 @@ def test_create_contact(app):
                       companyname="boOne",
                       address="23Kittiwake drive",
                       email="borka@mail.com",
-                      home="67464646464")
+                      home="+67464646464",
+                      mobile="(3212)58768",
+                      work="77-54-564-56",
+                      phone2="425 3616 6163 416")
     app.contact.create(contact)
     assert len(old_contacts)+1 == app.contact.count()
     new_contact = app.contact.get_contacts_list()
