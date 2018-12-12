@@ -69,7 +69,7 @@ class ContactHelper:
     def select_contact_by_index(self,index):
         wd = self.app.wd
         # click to edit link
-        wd.find_elements_by_xpath("//img[@alt='Edit']")[index].click()
+        wd.find_element_by_xpath("//img[@alt='Edit']")[index].click()
 
     def delete_contact(self):
         wd = self.app.wd
@@ -107,9 +107,8 @@ class ContactHelper:
                 lastname=cells[1].text
                 firstname=cells[2].text
                 all_phones=cells[5].text.splitlines()
-                self.contact_cache.append(Contact(lastname=lastname, firstname=firstname, id=id,
-                                                  home=all_phones[0], mobile=all_phones[1],
-                                                  work=all_phones[2], phone2=all_phones[3]))
+                self.contact_cache.append(Contact(lastname=lastname, firstname=firstname, id=id, all_phones_from_home_page=all_phones))
+
             return list(self.contact_cache)
 
     def open_contact_to_edit_by_index(self,index):
