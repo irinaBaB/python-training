@@ -68,6 +68,7 @@ class ContactHelper:
 
     def select_contact_by_index(self,index):
         wd = self.app.wd
+        wd.find_element_by_name("selected[]")[index].click()
         # click to edit link
         wd.find_element_by_xpath("//img[@alt='Edit']")[index].click()
 
