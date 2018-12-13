@@ -32,7 +32,10 @@ def merge_phone_from_edit_page(contact):
                                                            [contact.home,contact.mobile,contact.work,contact.phone2]))))
 
 def merge_emails_from_edit_page(contact):
-    return "\n".join([contact.email,contact.email2,contact.email3])
+    return "\n".join (filter(lambda x: x!="",
+                            map(lambda x: clear(x),filter (lambda x: x is not None,
+                                                           [contact.email,contact.email2,contact.email3]))))
+
 
 
 

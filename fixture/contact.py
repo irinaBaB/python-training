@@ -55,7 +55,7 @@ class ContactHelper:
     def modify_contact_by_index(self,index, new_contact_data):
         wd = self.app.wd
         self.return_to_homepage()
-        wd.find_elements_by_name("selected[]").click()[index]
+        wd.find_elements_by_name("selected[]")[index].click()
         # click to edit link
         self.select_contact_by_index(index)
         # update required fields
@@ -102,22 +102,22 @@ class ContactHelper:
 
     def get_contacts_list(self):
         if self.contact_cache is None:
-            wd = self.app.wd
-            self.return_to_homepage()
-            self.contact_cache=[]
-            for element in wd.find_elements_by_name("entry"):
-                cells = element.find_elements_by_tag_name("td")
-                id = cells[0].find_element_by_tag_name("input").get_attribute("value")
-                lastname=cells[1].text
-                firstname=cells[2].text
-                all_phones=cells[5].text
-                address=cells[3].text
-                all_emails_from_home_page=cells[4].text
-                self.contact_cache.append(Contact(lastname=lastname, firstname=firstname,
-                                                  all_emails_from_home_page = all_emails_from_home_page,
-                                                  id=id,address = address, all_phones_from_home_page=all_phones))
+                wd = self.app.wd
+                self.return_to_homepage()
+                self.contact_cache=[]
+                for element in wd.find_elements_by_name("entry"):
+                    cells = element.find_elements_by_tag_name("td")
+                    lastname=cells[1].text
+                    firstname=cells[2].text
+                    all_phones=cells[5].text
+                    address=cells[3].text
+                    id = cells[0].find_element_by_tag_name("input").get_attribute("value")
+                    all_emails_from_home_page=cells[4].text
+                    self.contact_cache.append(Contact(lastname=lastname, firstname=firstname,
+                                                      all_emails_from_home_page = all_emails_from_home_page,
+                                                      id=id,address = address, all_phones_from_home_page=all_phones))
 
-            return list(self.contact_cache)
+        return list(self.contact_cache)
 
     def open_contact_to_edit_by_index(self,index):
         wd = self.app.wd
