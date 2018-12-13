@@ -15,6 +15,9 @@ class Contact:
                   phone2=None,
                   fax=None,
                   id= None,
+                  email2=None,
+                  email3=None,
+                  all_emails_from_home_page=None,
                   all_phones_from_home_page = None):
             self.firstname = firstname
             self.middlename = middlename
@@ -29,6 +32,9 @@ class Contact:
             self.mobile = mobile
             self.phone2= phone2
             self.id = id
+            self.email2=email2
+            self.email3 = email3
+            self.all_emails_from_home_page=all_emails_from_home_page
             self.all_phones_from_home_page = all_phones_from_home_page
 
 
