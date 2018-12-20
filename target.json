@@ -2,7 +2,7 @@
   "web":{
     "baseUrl":"http://localhost:8081/addressbook/",
     "username":"admin",
-    "password":"secret",
+    "password":"secret"
   },
   "db":
   {
@@ -11,7 +11,4 @@
     "user":"root",
     "password":"root"
   }
-
-
-
 }

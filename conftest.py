@@ -29,17 +29,17 @@ def app(request):
     return fixture
 
 
-@pytest.fixture(scope="session", autouse=True)
+@pytest.fixture(scope="session")
 def db(request):
     db_config = load_config(request.config.getoption("--target"))['db']
     dbfixture = Dbfixture(host=db_config['host'],name = db_config['name'],user= db_config['user'], password=db_config['password'])
     def fin():
-       fixture.destroy()
+        dbfixture.destroy()
     request.addfinalizer(fin)
     return dbfixture
 
 
-@pytest.fixture(scope="session", autouse=True)
+@pytest.fixture(scope="session",autouse=True)
 def stop(request):
     def fin():
         fixture.session.ensure_logout()
@@ -47,10 +47,10 @@ def stop(request):
     request.addfinalizer(fin)
     return fixture
 
+
 def pytest_addoption(parser):
     parser.addoption("--browser",action = "store",default = "firefox")
     parser.addoption("--target", action="store", default="target.json")
-
 
 
 def pytest_generate_tests(metafunc):
