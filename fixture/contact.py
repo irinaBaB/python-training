@@ -75,6 +75,10 @@ class ContactHelper:
         # click to edit link
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
 
+    def select_contact_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_css_selector("input[value='%s']" % id).click()
+
     def delete_contact(self):
         wd = self.app.wd
         self.delete_contact_by_index(0)
@@ -86,6 +90,16 @@ class ContactHelper:
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         # alert = wd.switch_to.alert
         #alert.accept()
+        self.return_to_homepage()
+        self.contact_cache = None
+
+    def delete_contact_by_id(self, id):
+        wd = self.app.wd
+        self.return_to_homepage()
+        self.select_contact_by_id(id)
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        alert = wd.switch_to.alert
+        alert.accept()
         self.return_to_homepage()
         self.contact_cache = None
 
